@@ -1,7 +1,6 @@
 """
 Routes and views for the flask application.
 """
-
 from datetime import datetime
 from flask import render_template
 from WeatherService import app
@@ -35,3 +34,23 @@ def about():
         year=datetime.now().year,
         message='Your application description page.'
     )
+
+@app.route('/settings')
+def settings():
+    """Renders the settings page."""
+    import settings
+    try:
+        #aconfig = settings.get_as_dict()
+        #config = {}
+        config = settings.get_as_dict()
+        return render_template(
+            'settings.html',
+            title = 'Configuration',
+            config = config
+        )
+    except Exception as e:
+        return render_template(
+            'error.html',
+            title = 'Error',
+            message = e.message            
+        )

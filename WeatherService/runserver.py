@@ -2,10 +2,10 @@
 This script runs the WeatherService application using a development server.
 """
 
+import json
 from os import environ
-from WeatherService import app
+from WeatherService import app, settings
 
 if __name__ == '__main__':
-    HOST = environ.get('VCAP_APP_HOST', 'localhost')
-    PORT = int(environ.get('VCAP_APP_PORT', '5555'))
-    app.run(HOST, PORT)
+    config = settings.get_as_dict()
+    app.run(config['server.host'], config['server.port'])
