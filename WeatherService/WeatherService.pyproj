@@ -32,7 +32,7 @@
     <Compile Include="test.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="WeatherService\settings.py">
+    <Compile Include="settings.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="WeatherService\__init__.py" />
