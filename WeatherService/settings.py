@@ -9,6 +9,9 @@ DB_PASSWORD = 'postgres'
 DB_DATABASE = 'WeatherDB'
 SERVER_HOST = environ.get('SERVER_NAME', 'localhost')
 SERVER_PORT = environ.get('SERVER_PORT', '8080')
+
+# weather service
+OPENWEATHERMAP_API_KEY = '76daea430717531e830e04d35e0682e7'
     
 # load database settings from the environment vars if the application is running in Cloud Foundry environment
 if environ.get('VCAP_SERVICES'):
@@ -27,3 +30,56 @@ if environ.get('VCAP_APP_PORT'): SERVER_PORT = environ.get('VCAP_APP_PORT', '808
 # log settings
 LOG_FILE = "weatherservice.log"
 LOG_LEVEL = logging.DEBUG if DEBUG else logging.WARN
+
+# database schema 
+DDE_SCRIPT = """
+
+    CREATE TABLE IF NOT EXISTS Param (
+        ParamObjType        NVARCHAR(32)        NOT NULL    DEFAULT '__GLOBAL__',
+        ParamObject         INT                 NOT NULL    DEFAULT -1,
+        ParamName           NVARCHAR(32)        NOT NULL,
+        ParamValue          NVARCHAR(1024)      NOT NULL,
+        ParamDesc           NVARCHAR(1024),
+        PRIMARY KEY (ParamObjType, ParamObject, ParamName)
+    );
+
+    CREATE TABLE IF NOT EXISTS Place (
+        Id                  INT                 NOT NULL,
+        Name                NVARCHAR(1024)      NOT NULL,
+        CoordLon            DECIMAL(10,6)       NOT NULL    DEFAULT 0,
+        CoordLat            DECIMAL(10,6)       NOT NULL    DEFAULT 0,
+        Country             NVARCHAR(3),
+        PRIMARY KEY (Id)        
+    );
+
+    CREATE TABLE IF NOT EXISTS MeasurementType (
+        Id                  INT                 NOT NULL,
+        Name                NVARCHAR(32)        NOT NULL,
+        Unit                NVARCHAR(16),
+        PRIMARY KEY (Id)
+    );
+
+    CREATE TABLE IF NOT EXISTS Measurement (   
+        Time                DATETIME            NOT NULL,
+        Place               INT                 NOT NULL,
+        Type                INT                 NOT NULL,
+        Value               DECIMAL(10,6)       NOT NULL,
+        PRIMARY KEY (Time, Place, Type),
+        FOREIGN KEY (Type) REFERENCES MeasurementType(Id),
+        FOREIGN KEY (Place) REFERENCES Place(Id)
+    );      
+
+    INSERT INTO Param (ParamName, ParamValue, ParamDesc) VALUES ('schema_version', '1', 'Database schema version');
+
+    INSERT INTO MeasurementType VALUES (10, 'Temperature', 'Celsius');
+    INSERT INTO MeasurementType VALUES (11, 'Temperature Min.', 'Celsius');
+    INSERT INTO MeasurementType VALUES (12, 'Temperature Max.', 'Celsius');
+    INSERT INTO MeasurementType VALUES (20, 'Pressure', 'hPa');
+    INSERT INTO MeasurementType VALUES (21, 'Pressure (sea level)', 'hPa');
+    INSERT INTO MeasurementType VALUES (22, 'Pressure (ground level)', 'hPa');
+    INSERT INTO MeasurementType VALUES (30, 'Humidity', '%');
+    INSERT INTO MeasurementType VALUES (40, 'Rain 3-hour cumulative', 'mm');
+    INSERT INTO MeasurementType VALUES (50, 'Wind Speed', 'km/h');
+    INSERT INTO MeasurementType VALUES (51, 'Wind Direction', 'degree');
+
+"""

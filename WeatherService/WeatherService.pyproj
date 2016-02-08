@@ -28,6 +28,14 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="WeatherService\views.py" />
+    <Compile Include="WeatherService\__init__.py" />
+    <Compile Include="lib\database.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="lib\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="runserver.py" />
     <Compile Include="test.py">
       <SubType>Code</SubType>
@@ -35,8 +43,6 @@
     <Compile Include="settings.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="WeatherService\__init__.py" />
-    <Compile Include="WeatherService\views.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="WeatherService\" />
@@ -45,9 +51,9 @@
     <Folder Include="WeatherService\static\fonts\" />
     <Folder Include="WeatherService\static\scripts\" />
     <Folder Include="WeatherService\templates\" />
+    <Folder Include="lib\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="requirements.txt" />
     <Content Include="WeatherService\static\content\bootstrap.css" />
     <Content Include="WeatherService\static\content\bootstrap.min.css" />
     <Content Include="WeatherService\static\content\site.css" />
@@ -55,13 +61,14 @@
     <Content Include="WeatherService\static\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="WeatherService\static\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="WeatherService\static\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="WeatherService\static\scripts\_references.js" />
     <Content Include="WeatherService\static\scripts\bootstrap.js" />
     <Content Include="WeatherService\static\scripts\bootstrap.min.js" />
-    <Content Include="WeatherService\static\scripts\jquery-1.10.2.intellisense.js" />
+    <None Include="WeatherService\static\scripts\jquery.validate-vsdoc.js" />
+    <None Include="WeatherService\static\scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="WeatherService\static\scripts\jquery-1.10.2.js" />
     <Content Include="WeatherService\static\scripts\jquery-1.10.2.min.js" />
     <Content Include="WeatherService\static\scripts\jquery-1.10.2.min.map" />
-    <Content Include="WeatherService\static\scripts\jquery.validate-vsdoc.js" />
     <Content Include="WeatherService\static\scripts\jquery.validate.js" />
     <Content Include="WeatherService\static\scripts\jquery.validate.min.js" />
     <Content Include="WeatherService\static\scripts\jquery.validate.unobtrusive.js" />
@@ -69,13 +76,15 @@
     <Content Include="WeatherService\static\scripts\modernizr-2.6.2.js" />
     <Content Include="WeatherService\static\scripts\respond.js" />
     <Content Include="WeatherService\static\scripts\respond.min.js" />
-    <Content Include="WeatherService\static\scripts\_references.js" />
-    <Content Include="WeatherService\templates\error.html" />
     <Content Include="WeatherService\templates\about.html" />
     <Content Include="WeatherService\templates\contact.html" />
+    <Content Include="WeatherService\templates\error.html" />
     <Content Include="WeatherService\templates\index.html" />
     <Content Include="WeatherService\templates\layout.html" />
     <Content Include="WeatherService\templates\settings.html" />
+    <Content Include="WeatherService\views.pyc" />
+    <Content Include="WeatherService\__init__.pyc" />
+    <Content Include="requirements.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 
