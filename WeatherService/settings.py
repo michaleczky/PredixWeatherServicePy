@@ -1,4 +1,5 @@
 import json, logging
+from datetime import datetime
 from os import environ
 
 # default settings for development and testing
@@ -12,6 +13,7 @@ SERVER_PORT = environ.get('SERVER_PORT', '8080')
 
 # weather service
 OPENWEATHERMAP_API_KEY = '76daea430717531e830e04d35e0682e7'
+OPENWEATHERMAP_CITIES = (3054643, 3060972, 2761369, 3067696, 3196359, 683506, 2950158, 6455259, 7287650, 2911298, 2925533, 2825297, 715429, 721472, 3050616, 3050434, 3045190, 3044774, 721239, 2643743, 6359304, 2995469)
     
 # load database settings from the environment vars if the application is running in Cloud Foundry environment
 if environ.get('VCAP_SERVICES'):
@@ -30,6 +32,13 @@ if environ.get('VCAP_APP_PORT'): SERVER_PORT = environ.get('VCAP_APP_PORT', '808
 # log settings
 LOG_FILE = "weatherservice.log"
 LOG_LEVEL = logging.DEBUG if DEBUG else logging.WARN
+
+# datetime settings
+MIN_DATE = datetime(1901, 01, 01)
+MIN_DATE_STR = '1901-01-01'
+MAX_DATE = datetime(2099, 12, 31)
+MAX_DATE_STR = '2099-12-31'
+DATEFORMAT = '%Y-%m-%d'
 
 # database schema 
 DDE_SCRIPT = """

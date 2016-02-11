@@ -18,6 +18,7 @@
     <PythonWsgiHandler>$(MSBuildProjectName).app</PythonWsgiHandler>
     <Name>WeatherService</Name>
     <RootNamespace>WeatherService</RootNamespace>
+    <DebugStdLib>False</DebugStdLib>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,6 +29,12 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="lib\weatherdata.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WeatherService\models.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="WeatherService\views.py" />
     <Compile Include="WeatherService\__init__.py" />
     <Compile Include="lib\database.py">
@@ -82,6 +89,7 @@
     <Content Include="WeatherService\templates\index.html" />
     <Content Include="WeatherService\templates\layout.html" />
     <Content Include="WeatherService\templates\settings.html" />
+    <Content Include="WeatherService\templates\stats.html" />
     <Content Include="WeatherService\views.pyc" />
     <Content Include="WeatherService\__init__.pyc" />
     <Content Include="requirements.txt" />

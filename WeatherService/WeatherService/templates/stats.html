@@ -1,0 +1,35 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>{{title}}</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading"><h3>Places</h3></div>
+    <div class="panel-body">
+        <table class="table table-hover table-condensed">            
+            <thead>
+                <tr>
+                    <th>#Id</th>                
+                    <th>Name</th>
+                    <th>Coordinates</th>
+                    <th>Country</th>
+                    <th>No. of Measurements</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for place in places  %}
+                <tr>
+                    <td>{{place['Id']}}</td>
+                    <td>{{place['Name']}}</td>
+                    <td>{{place['CoordLon']}}, {{place['CoordLat']}}</td>
+                    <td>{{place['Country']}}</td>
+                    <td>{{place['MeasurementCount']}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
