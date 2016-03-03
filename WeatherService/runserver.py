@@ -2,19 +2,14 @@
 This script runs the WeatherService application using a development server.
 """
 
-import json, settings, logging
+import json, settings, logging, sys
 from os import environ
 from WeatherService import app
 
 if __name__ == '__main__':
-    # setup the logging
-    logFormatStr = '[%(asctime)s] p%(process)s {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s'
-    logging.basicConfig(format = logFormatStr, filename = settings.LOG_FILE, level=settings.LOG_LEVEL)
-    formatter = logging.Formatter(logFormatStr,'%m-%d %H:%M:%S')
-    streamHandler = logging.StreamHandler()
-    streamHandler.setLevel(logging.DEBUG)
-    streamHandler.setFormatter(formatter)
-    app.logger.addHandler(streamHandler)
+    # setup the logging    
+    logFormatStr = '[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s'
+    logging.basicConfig(format = logFormatStr, stream = sys.stdout, level = settings.LOG_LEVEL)
     # start the app
     app.config.update({
         'SERVER_HOST': settings.SERVER_HOST,

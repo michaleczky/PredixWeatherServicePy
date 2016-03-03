@@ -3,6 +3,9 @@ from datetime import datetime
 from os import environ
 
 # default settings for development and testing
+"""
+Debug
+"""
 DEBUG = True
 DB_HOST = 'localhost'
 DB_USERNAME = 'postgres'
@@ -17,7 +20,7 @@ OPENWEATHERMAP_CITIES = (3054643, 3060972, 2761369, 3067696, 3196359, 683506, 29
     
 # load database settings from the environment vars if the application is running in Cloud Foundry environment
 if environ.get('VCAP_SERVICES'):
-    DEBUG = False
+    #DEBUG = False
     _env = json.loads(environ.get('VCAP_SERVICES'))    
     DB_DATABASE = _env['postgres'][0]['credentials']['database']
     DB_HOST = _env['postgres'][0]['credentials']['host']

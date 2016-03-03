@@ -4,7 +4,7 @@ Routes and views for the flask application.
 from datetime import datetime
 from flask import render_template, json, request
 from WeatherService import app, models
-from lib import database
+from lib import database, weatherdata
 from settings import MIN_DATE_STR, MAX_DATE_STR, DATEFORMAT
 
 @app.route('/')
@@ -42,6 +42,21 @@ def settings():
         return render_template('error.html',
             title = 'Error',
             message = e.message)
+
+@app.route('/collect')
+def collect():
+    from settings import OPENWEATHERMAP_CITIES
+    """Collects data from the OpenWeatherMap service and shows the data collection result."""
+    errors = []
+    result = ''
+    if (request.args.get('run') == '1'):
+        for city in OPENWEATHERMAP_CITIES:
+            resp = weatherdata.query_weather_data(city)
+            weatherdata.load_data(resp)
+            result = result + 'City %s weather information collected...\n' % resp['city']['name']
+    return render_template('collect.html',
+        result = result,
+        title = 'Collect Data')
 
 @app.route('/stats')
 def stats():
